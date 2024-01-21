@@ -1,0 +1,89 @@
+    const image = document.getElementById('cover'),
+    title = document.getElementById('Music-title'),
+    artist = document.getElementById('Music-artist'),
+    currentTineEl = document.getElementById('current-time'),
+    durationEl = document.getElementById('duration'),
+    progress = document.getElementById('progress'),
+    playerProgress = document.getElementById('player-progress'),
+    prevBtn = document.getElementById('prev'),
+    nextBtn = document.getElementById('next'),
+    playBtn = document.getElementById('play'),
+    background = document.getElementById('bg-img');
+const music = new Audio(); 
+const songs = [
+    {
+        path: 'O Maahi_192(Ghantalele.com).mp3',
+        displayName: 'O Maahi',
+        cover: 'https://wp.missmalini.com/wp-content/uploads/2023/12/httpswp.missmalini.comwp-adminpost.phppost365312actionedit-2023-12-11T174634.744.jpg',
+        artist: 'Arijit Singh, Pritam',
+
+
+    },
+    {
+        path: 'Lutt Putt Gaya_192(Ghantalele.com).mp3',
+        displayName: 'Lutt Putt Gaya',
+        cover: 'https://assets.telegraphindia.com/telegraph/2023/Nov/1700804509_dunki-song-1.jpg',
+        artist: 'Arijit Singh, Pritam',
+
+
+
+
+    },
+    {
+        path: 'Saware_192(Ghantalele.com).mp3',
+        displayName: 'Saware',
+        cover: 'https://c.saavncdn.com/951/Phantom-Hindi-2015-500x500.jpg',
+        artist: 'Arijit Singh, Pritam',
+
+
+
+
+    },
+
+
+]
+let musicIndex = 0;
+let isPlaying = false;
+function togglePlay() {
+    if(isPlaying){
+        pauseMusic();
+    }else{
+        playMusic();
+    }
+
+
+}  
+
+function playMusic(){
+    isPlaying = true;
+
+    playBtn.classList.replace('fa-play', 'fa-pause');
+    playBtn.setAttribute('title', 'pause');
+    music.play();
+}
+function pauseMusic(){
+    isPlaying = false;
+
+    playBtn.classList.replace('fa-pause', 'fa-play');
+    playBtn.setAttribute('title', 'play');
+    music.pause();
+}
+function loadMusic(song){
+    music.src = song.path;
+    title.textContent = song.displayName;
+    artist.textContent = song.artist;
+    image.src = song.cover;
+    background.src = song.cover;
+}
+function changeMusic(direction){
+    musicIndex = (musicIndex + direction + songs.length) % songs.length;
+    loadMusic(songs[musicIndex]);
+    playMusic();
+}
+
+
+
+
+
+
+
