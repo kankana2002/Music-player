@@ -1,7 +1,7 @@
     const image = document.getElementById('cover'),
     title = document.getElementById('Music-title'),
     artist = document.getElementById('Music-artist'),
-    currentTineEl = document.getElementById('current-time'),
+    currentTimeEl = document.getElementById('current-time'),
     durationEl = document.getElementById('duration'),
     progress = document.getElementById('progress'),
     playerProgress = document.getElementById('player-progress'),
@@ -39,6 +39,80 @@ const songs = [
 
 
     },
+    {
+        path: 'Chaleya_192(Ghantalele.com).mp3',
+        displayName: 'Chaleya',
+        cover: 'https://akm-img-a-in.tosshub.com/indiatoday/images/media_bank/202309/chaleya-song-141618193-1x1.jpg?VersionId=4H9DEXybp0zu2rGuku7n_C2z8stxuBJZ',
+        artist: 'Shilpa Rao, Arijit singh',
+
+
+
+
+    },
+    {
+        path: 'Jhoome Jo Pathaan_192(Ghantalele.com).mp3',
+        displayName: 'Jhoome Jo Pathaan',
+        cover: 'https://images.hindustantimes.com/img/2022/12/22/550x309/jhoome_jo_pathaan_1671686848816_1671686848951_1671686848951.png',
+        artist: 'Arijit singh',
+
+
+
+
+    },
+    {
+        path: 'Phir Aur Kya Chahiye_192(Ghantalele.com).mp3',
+        displayName: 'Phir Aur Kya Chahiye',
+        cover: 'https://s.saregama.tech/image/c/fw_485/3/61/88/zara-hatke-zara-bachke_1692702056.jpg',
+        artist: 'Arijit singh',
+
+
+
+
+    },
+    {
+        path: 'Pyaar Hota Kayi Baar Hai_192(Ghantalele.com).mp3',
+        displayName: 'Pyaar Hota Kayi Baar Hai',
+        cover: 'https://pragativadi.com/wp-content/uploads/2023/02/WhatsApp-Image-2022-05-07-at-4.30.45-PM-1.jpg',
+        artist: 'Arijit singh',
+
+
+
+
+    },
+    {
+        path: 'Tere Pyaar Mein_192(Ghantalele.com).mp3',
+        displayName: 'Tere Pyaar Mein',
+        cover: 'https://feeds.abplive.com/onecms/images/uploaded-images/2023/01/30/87c99fd2ff6931d389814987cc9e8b161675099276059380_original.jpg',
+        artist: 'Arijit singh',
+
+
+
+
+    },
+    {
+        path: 'Tere Vaaste_192(Ghantalele.com).mp3',
+        displayName: 'Tere Vaaste',
+        cover: 'https://i.ytimg.com/vi/X7WXHhokylc/maxresdefault.jpg',
+        artist: 'Vickey Kaushal,Sara Ali Khan',
+
+
+
+
+    },
+    {
+        path: 'Zinda Banda_192(Ghantalele.com).mp3',
+        displayName: 'Zinda Banda',
+        cover: 'https://c.saavncdn.com/406/Zinda-Banda-From-Jawan-Hindi-2023-20230731043357-500x500.jpg',
+        artist: 'Shah Rukh Khan, Nayanthara',
+
+
+
+
+    },
+
+    
+    
+
 
 
 ]
@@ -58,14 +132,14 @@ function playMusic(){
     isPlaying = true;
 
     playBtn.classList.replace('fa-play', 'fa-pause');
-    playBtn.setAttribute('title', 'pause');
+    playBtn.setAttribute('title', 'Pause');
     music.play();
 }
 function pauseMusic(){
     isPlaying = false;
 
     playBtn.classList.replace('fa-pause', 'fa-play');
-    playBtn.setAttribute('title', 'play');
+    playBtn.setAttribute('title', 'Play');
     music.pause();
 }
 function loadMusic(song){
@@ -80,6 +154,35 @@ function changeMusic(direction){
     loadMusic(songs[musicIndex]);
     playMusic();
 }
+
+function updateProgressBar(){
+    const { duration, currentTime} = music;
+    const progressPercent = (currentTime/ duration) * 100;
+    progress.style.width = `${progressPercent}%`;
+
+    const formatTime = (time) => String(Math.floor(time)).padStart(2, '0');
+    durationEl.textContent = `${formatTime(duration / 60)}:${formatTime(duration % 60)}`;
+    currentTimeEl.textContent = `${formatTime(currentTime / 60)}:${formatTime(currentTime % 60)}`;
+}
+function setProgressBar (e) {
+    const width = playerProgress.clientWidth;
+    const clickX = e.offsetX;
+    music.currentTime = (clickX / width) * music.duration;
+}
+playBtn.addEventListener('click', togglePlay);
+prevBtn.addEventListener('click', () => changeMusic(-1));
+nextBtn.addEventListener('click', () => changeMusic(1));
+music.addEventListener('ended', () => changeMusic(1));
+music.addEventListener('timeupdate', updateProgressBar);
+playerProgress.addEventListener('click', setProgressBar);
+
+loadMusic(songs[musicIndex]);
+
+
+
+
+
+
 
 
 
