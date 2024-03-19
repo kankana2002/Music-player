@@ -28,7 +28,7 @@ To run the app locally on your machine, follow these simple steps:<br>
 ⏭<b>script.js:</b> Implements the functionality of the music player using JavaScript, including play, pause, skip, and volume control logic.<br>
 
 ♾<b>Usage</b>♾
-🔀<b>Play:</b?> Click the play button to start playing the current track.<br>
+🔀<b>Play:</b> Click the play button to start playing the current track.<br>
 🔀<b>Pause:</b> Click the pause button to pause the currently playing track.<br>
 🔀<b>Skip Track:</b> Click the next button to skip to the next track in the playlist.<br>
 🔀<b>Volume Control:</b> Adjust the volume level using the volume slider to suit your preferences.<br>
